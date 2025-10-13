@@ -7,7 +7,9 @@ namespace BusinessLogicLayer.Models
         public int ID { get; set; }
         [Required]
         public string Text { get; set; }
-        public DateTime CreatedDate { get; set; }
+
+        [DataType(DataType.Date)]
+        public DateTime date_created { get; set; }
 
     }
 }

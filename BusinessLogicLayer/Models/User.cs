@@ -13,6 +13,8 @@ namespace BusinessLogicLayer.Models
 
         [Required]
         public string EmailAdress {  get; set; }
+        public string UserName {  get; set; }
+
 
     }
 }
