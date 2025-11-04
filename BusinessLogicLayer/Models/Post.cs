@@ -1,19 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace BusinessLogicLayer.Models
+﻿namespace BusinessLogicLayer.Models
 {
+
     public class Post
     {
-        public int ID { get; set; }
+
+        public int Id { get; set; }
         public string Title { get; set; }
-
-        [DataType(DataType.Date)]
-        public DateTime date_found { get; set; }
-
-        [DataType(DataType.Date)]
-        public DateTime date_created { get; set; }
-
         public string Description { get; set; }
+        public DateTime DateCreated { get; set; }
+        public byte []? Attachment { get; set; }
+
 
     }
 }

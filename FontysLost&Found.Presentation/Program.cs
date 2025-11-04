@@ -1,7 +1,14 @@
+using BusinessLogicLayer.Abstractions;
+using BusinessLogicLayer.Services;
+using Persistence.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+//DI registrations
+builder.Services.AddScoped<IPostRepository, postRepository>();
+builder.Services.AddScoped<IPostService, postService>();
 
 var app = builder.Build();
 
