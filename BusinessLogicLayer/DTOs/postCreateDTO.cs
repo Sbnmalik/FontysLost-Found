@@ -2,7 +2,7 @@
 
 namespace BusinessLogicLayer.DTOs
 {
-
+    // Incoming data
     public class postCreateDTO
     {
         //add data annotations for validation
@@ -14,6 +14,7 @@ namespace BusinessLogicLayer.DTOs
         public byte[]? Attachment { get; set; }
 
     }
+    // Outgoing data
     public class postDto
     {
         public int Id { get; set; }
