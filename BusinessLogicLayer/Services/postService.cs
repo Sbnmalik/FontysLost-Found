@@ -3,10 +3,10 @@ using BusinessLogicLayer.DTOs;
 
 namespace BusinessLogicLayer.Services
 {
-    public class postService : IPostService
+    public class PostService : IPostService
     {
         private readonly IPostRepository _postRepository;
-        public postService(IPostRepository postRepository)
+        public PostService(IPostRepository postRepository)
         {
             _postRepository = postRepository;
         }

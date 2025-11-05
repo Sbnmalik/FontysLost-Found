@@ -8,10 +8,10 @@ using System.Data;
 
 namespace Persistence.Repositories
 {
-    public class postRepository : IPostRepository
+    public class PostRepository : IPostRepository
     {
         private readonly string _connectionString;
-        public postRepository(IConfiguration cfg)
+        public PostRepository(IConfiguration cfg)
         {
             _connectionString = cfg.GetConnectionString("DefaultConnection") ??
                 throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");

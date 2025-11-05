@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using BusinessLogicLayer.Abstractions;
+using BusinessLogicLayer.Services;
 using Persistence.Repositories;
 using System.Reflection;
 
@@ -16,7 +17,10 @@ namespace Persistence
                    .AsImplementedInterfaces()
                    .InstancePerLifetimeScope();
             // Explicitly register PostRepository as IPostRepository
-            builder.RegisterType<postRepository>().As<IPostRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<PostRepository>()
+                .As<IPostRepository>()
+                .InstancePerLifetimeScope();
+
 
 
         }
