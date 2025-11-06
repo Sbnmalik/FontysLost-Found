@@ -1,0 +1,40 @@
+﻿@page
+@model FontysLost_Found.Presentation.Pages.CreateModel
+@{
+    ViewData["Title"] = "Create a post";
+}
+
+<h1>Create a lost object post</h1>
+
+<form method="post" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
+
+    <div>
+        <label for="Title">Title</label>
+        <input type="text" id="Title" name="Title" required maxlength="200" />
+    </div>
+
+    <div>
+        <label for="Date">Date</label>
+        <input type="date" id="Date" name="Date" required />
+    </div>
+
+    <div>
+        <label for="Time">Time</label>
+        <input type="time" id="Time" name="Time" />
+    </div>
+
+    <div>
+        <label for="Description">Description</label>
+        <textarea id="Description" name="Description" rows="5" maxlength="2000"></textarea>
+    </div>
+
+    <div>
+        <label for="Attachment">Attachment</label>
+        <input type="file" id="Attachment" name="Attachment" accept="image/*,application/pdf" />
+    </div>
+
+    <div>
+        <button type="submit">Submit</button>
+    </div>
+</form>
