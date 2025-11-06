@@ -11,11 +11,7 @@ namespace Persistence
     {
         protected override void Load(ContainerBuilder builder)
         {
-            // Register all classes in the Persistence assembly that implement interfaces
-            var persistenceAssembly = Assembly.GetExecutingAssembly();
-            builder.RegisterAssemblyTypes(persistenceAssembly)
-                   .AsImplementedInterfaces()
-                   .InstancePerLifetimeScope();
+
             // Explicitly register PostRepository as IPostRepository
             builder.RegisterType<PostRepository>()
                 .As<IPostRepository>()
