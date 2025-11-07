@@ -20,13 +20,21 @@ namespace FontysLost_Found.Presentation.Pages
         { 
             return Task.FromResult<IActionResult>(Page());
         }
-        public async Task<IActionResult> OnPostAsync([FromForm] string Title)
+        public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid) return Page();
 
+            // Handle file upload and convert to byte[]
+            var file = Request.Form.Files["Attachment"];
+
+            if (file != null && file.Length > 0){
+                await using var ms = new MemoryStream();
+                await file.CopyToAsync(ms);
+                input.Attachment = ms.ToArray();
+            }
             var id = await _postService.CreateAsync(input);
             TempData["Flash.Success"] = "Lost object post created!";
-            return RedirectToPage("Details", new { id });
+            return RedirectToPage("Index", new { id });
         }
     }
 }
