@@ -1,14 +1,14 @@
-﻿using BusinessLogicLayer.Abstractions;
-using BusinessLogicLayer.Models;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using System.Data;
 
 
 
+
+
 namespace Persistence.Repositories
 {
-    public class PostRepository : IPostRepository
+    public class PostRepository 
     {
         private readonly string _connectionString;
         public PostRepository(IConfiguration cfg)
@@ -16,7 +16,7 @@ namespace Persistence.Repositories
             _connectionString = cfg.GetConnectionString("DefaultConnection") ??
                 throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
         }
-        public async Task<int> InsertAsync(Post entity)
+        public async Task<int> InsertAsync(postDto entity)
         {
             const string sql = @"
             INSERT INTO dbo.Posts
@@ -38,7 +38,7 @@ namespace Persistence.Repositories
             var newId = await cmd.ExecuteScalarAsync();
             return Convert.ToInt32(newId);
         }
-        public Task<Post?> GetByIdAsync(int id)
+        public Task<postDto?> GetByIdAsync(int id)
         {
             throw new NotImplementedException();
         }

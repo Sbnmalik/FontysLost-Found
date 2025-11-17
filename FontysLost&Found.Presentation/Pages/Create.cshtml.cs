@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using BusinessLogicLayer.Abstractions;
-using BusinessLogicLayer.DTOs;
+using Persistence;
+using BusinessLogicLayer.Services;
 
 namespace FontysLost_Found.Presentation.Pages
 
@@ -9,8 +10,8 @@ namespace FontysLost_Found.Presentation.Pages
     [BindProperties]
     public class CreateModel : PageModel
     {
-        private readonly IPostService _postService;
-        public CreateModel(IPostService postService)
+        private readonly PostService _postService;
+        public CreateModel(PostService postService)
         {
             _postService = postService;
         }
