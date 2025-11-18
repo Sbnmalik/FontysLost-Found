@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Persistence;
 using BusinessLogicLayer.Services;
 
-namespace FontysLost_Found.Presentation.Pages
+namespace FontysLost_Found.Presentation.Pages.Posts
 
 {
     [BindProperties]
