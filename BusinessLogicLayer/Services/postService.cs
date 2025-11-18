@@ -1,25 +1,27 @@
-﻿using BusinessLogicLayer.Abstractions;
-using BusinessLogicLayer.DTOs;
+﻿using Persistence;
+using Persistence.Repositories;
 
 namespace BusinessLogicLayer.Services
 {
-    public class PostService : IPostService
-    {
-        private readonly IPostRepository _postRepository;
-        public PostService(IPostRepository postRepository)
+    public class PostService
+    { 
+        private readonly PostRepository _postRepository;
+        public PostService(PostRepository postRepository)
         {
             _postRepository = postRepository;
         }
         public async Task<int> CreateAsync(postCreateDTO input)
         {
-            var post = new Models.Post
+
+
+            var dto = new postDto
             {
                 Title = input.Title,
                 Description = input.Description,
                 DateCreated = DateTime.UtcNow,
-                Attachment = input.Attachment
+                Attachment = input.Attachment,
             };
-            return await _postRepository.InsertAsync(post);
+            return await _postRepository.InsertAsync(dto);
         }
         public async Task<postDto?> GetAsync(int id)
         {

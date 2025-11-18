@@ -1,6 +1,4 @@
 ﻿using Autofac;
-using BusinessLogicLayer.Abstractions;
-using BusinessLogicLayer.Services;
 using Persistence.Repositories;
 using System.Reflection;
 
@@ -12,9 +10,9 @@ namespace Persistence
         protected override void Load(ContainerBuilder builder)
         {
 
-            // Explicitly register PostRepository as IPostRepository
+            //Explicitly register PostRepository as IPostRepository
             builder.RegisterType<PostRepository>()
-                .As<IPostRepository>()
+                .AsSelf()
                 .InstancePerLifetimeScope();
 
 

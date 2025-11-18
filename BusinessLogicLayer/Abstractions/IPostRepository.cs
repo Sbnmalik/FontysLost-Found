@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace BusinessLogicLayer.Abstractions
 {
-    public interface IPostRepository
-    {
-        Task<int> InsertAsync(Post entity);
-        Task<Post?> GetByIdAsync(int id);
-    }
+    //public interface IPostRepository
+    //{
+    //    Task<int> InsertAsync(Post entity);
+    //    Task<Post?> GetByIdAsync(int id);
+    //}
 }

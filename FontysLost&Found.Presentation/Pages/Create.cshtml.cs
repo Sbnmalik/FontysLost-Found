@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using BusinessLogicLayer.Abstractions;
-using BusinessLogicLayer.DTOs;
+//using BusinessLogicLayer.Abstractions;
+using Persistence;
+using BusinessLogicLayer.Services;
 
 namespace FontysLost_Found.Presentation.Pages
 
@@ -9,8 +10,8 @@ namespace FontysLost_Found.Presentation.Pages
     [BindProperties]
     public class CreateModel : PageModel
     {
-        private readonly IPostService _postService;
-        public CreateModel(IPostService postService)
+        private readonly PostService _postService;
+        public CreateModel(PostService postService)
         {
             _postService = postService;
         }
@@ -20,13 +21,21 @@ namespace FontysLost_Found.Presentation.Pages
         { 
             return Task.FromResult<IActionResult>(Page());
         }
-        public async Task<IActionResult> OnPostAsync([FromForm] string Title)
+        public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid) return Page();
 
+            // Handle file upload and convert to byte[]
+            var file = Request.Form.Files["Attachment"];
+
+            if (file != null && file.Length > 0){
+                await using var ms = new MemoryStream();
+                await file.CopyToAsync(ms);
+                input.Attachment = ms.ToArray();
+            }
             var id = await _postService.CreateAsync(input);
             TempData["Flash.Success"] = "Lost object post created!";
-            return RedirectToPage("Details", new { id });
+            return RedirectToPage("Index", new { id });
         }
     }
 }
