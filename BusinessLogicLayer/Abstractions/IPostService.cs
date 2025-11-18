@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace BusinessLogicLayer.Abstractions
 {
-    public  interface IPostService
-    {
-        Task<int> CreateAsync(postCreateDTO input);
-        Task<postDto?>GetAsync(int id);
-    }
+    //public  interface IPostService
+    //{
+    //    Task<int> CreateAsync(postCreateDTO input);
+    //    Task<postDto?>GetAsync(int id);
+    ////}
 }

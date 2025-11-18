@@ -4,7 +4,7 @@ using Persistence.Repositories;
 namespace BusinessLogicLayer.Services
 {
     public class PostService
-    {
+    { 
         private readonly PostRepository _postRepository;
         public PostService(PostRepository postRepository)
         {
