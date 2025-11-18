@@ -1,4 +1,5 @@
-﻿using Persistence;
+﻿using BusinessLogicLayer.Models;
+using Persistence;
 using Persistence.Repositories;
 
 namespace BusinessLogicLayer.Services
@@ -23,21 +24,23 @@ namespace BusinessLogicLayer.Services
             };
             return await _postRepository.InsertAsync(dto);
         }
-        public async Task<postDto?> GetAsync(int id)
+        public async Task<List<Post>> GetAllAsync()
         {
-            var post = await _postRepository.GetByIdAsync(id);
-            if (post == null)
-            {
-                return null;
-            }
+            var dtos = await _postRepository.GetAllAsync();
 
-            return new postDto
+            var posts = dtos.Select(d => new Post
             {
-                Id = post.Id,
-                Title = post.Title,
-                Description = post.Description,
-                DateCreated = post.DateCreated
-            };
+                Id = d.Id,
+                Title = d.Title,
+                Description = d.Description,
+                DateCreated = d.DateCreated,
+                CategoryId = d.CategoryId,
+                Attachment = d.Attachment,
+                FinderId = d.FinderId,
+                RetrieverId = d.RetrieverId
+            }).ToList();
+
+            return posts;
         }
     }
 }
