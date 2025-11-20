@@ -8,7 +8,7 @@ using System.Data;
 
 namespace Persistence.Repositories
 {
-    public class PostRepository 
+    public class PostRepository
     {
         private readonly string _connectionString;
         public PostRepository(IConfiguration cfg)
@@ -24,15 +24,15 @@ namespace Persistence.Repositories
             OUTPUT INSERTED.Id
             VALUES (@Title, @Description, @DateCreated, @CategoryId, @Attachment, @FinderId, @RetrieverId);";
             await using var conn = new SqlConnection(_connectionString);
-            await conn .OpenAsync();
+            await conn.OpenAsync();
 
             await using var cmd = new SqlCommand(sql, conn);
             cmd.Parameters.Add(new SqlParameter("@Title", SqlDbType.NVarChar, 200) { Value = entity.Title });
             cmd.Parameters.Add(new SqlParameter("@Description", SqlDbType.NVarChar, 200) { Value = entity.Description });
             cmd.Parameters.Add(new SqlParameter("@DateCreated", SqlDbType.DateTime) { Value = entity.DateCreated });
-            cmd.Parameters.Add(new SqlParameter("@CategoryId", SqlDbType.Int) { Value = (object)entity.CategoryId ?? DBNull.Value});
+            cmd.Parameters.Add(new SqlParameter("@CategoryId", SqlDbType.Int) { Value = (object)entity.CategoryId ?? DBNull.Value });
             cmd.Parameters.Add(new SqlParameter("@Attachment", SqlDbType.VarBinary, -1) { Value = (object?)entity.Attachment ?? DBNull.Value });
-            cmd.Parameters.Add(new SqlParameter("@FinderId", SqlDbType.Int) { Value =(object) entity.FinderId ?? DBNull.Value});
+            cmd.Parameters.Add(new SqlParameter("@FinderId", SqlDbType.Int) { Value = (object)entity.FinderId ?? DBNull.Value });
             cmd.Parameters.Add(new SqlParameter("@RetrieverId", SqlDbType.Int) { Value = (object?)entity.RetrieverId ?? DBNull.Value });
 
             var newId = await cmd.ExecuteScalarAsync();
@@ -79,6 +79,29 @@ namespace Persistence.Repositories
             }
 
             return result;
+        }
+        //add update method
+        public async Task UpdateAsync(postDto entity)
+        {
+            const string sql = @"
+            INSERT INTO dbo.Posts
+            (Title, Description, date_created, categoryId, Attachment, finderId, retrieverId)
+            OUTPUT INSERTED.Id
+            VALUES (@Title, @Description, @DateCreated, @CategoryId, @Attachment, @FinderId, @RetrieverId);";
+            await using var conn = new SqlConnection(_connectionString);
+            await conn.OpenAsync();
+
+            await using var cmd = new SqlCommand(sql, conn);
+            cmd.Parameters.Add(new SqlParameter("@Title", SqlDbType.NVarChar, 200) { Value = entity.Title });
+            cmd.Parameters.Add(new SqlParameter("@Description", SqlDbType.NVarChar, 200) { Value = entity.Description });
+            cmd.Parameters.Add(new SqlParameter("@DateCreated", SqlDbType.DateTime) { Value = entity.DateCreated });
+            cmd.Parameters.Add(new SqlParameter("@CategoryId", SqlDbType.Int) { Value = (object)entity.CategoryId ?? DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter("@Attachment", SqlDbType.VarBinary, -1) { Value = (object?)entity.Attachment ?? DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter("@FinderId", SqlDbType.Int) { Value = (object)entity.FinderId ?? DBNull.Value });
+            cmd.Parameters.Add(new SqlParameter("@RetrieverId", SqlDbType.Int) { Value = (object?)entity.RetrieverId ?? DBNull.Value });
+
+            await cmd.ExecuteNonQueryAsync();
+
         }
     }
 }
