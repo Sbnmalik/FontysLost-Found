@@ -38,9 +38,47 @@ namespace Persistence.Repositories
             var newId = await cmd.ExecuteScalarAsync();
             return Convert.ToInt32(newId);
         }
-        public Task<postDto?> GetByIdAsync(int id)
+        public async Task<List<postDto>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            const string sql = @"
+                SELECT Id, Title, Description, date_created, categoryId, Attachment, finderId, retrieverId
+                FROM dbo.Posts
+                ORDER BY date_created DESC;";
+
+            var result = new List<postDto>();
+
+            await using var conn = new SqlConnection(_connectionString);
+            await conn.OpenAsync();
+
+            await using var cmd = new SqlCommand(sql, conn);
+            await using var reader = await cmd.ExecuteReaderAsync();
+
+            while (await reader.ReadAsync())
+            {
+                var dto = new postDto
+                {
+                    Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                    Title = reader.GetString(reader.GetOrdinal("Title")),
+                    Description = reader.GetString(reader.GetOrdinal("Description")),
+                    DateCreated = reader.GetDateTime(reader.GetOrdinal("date_created")),
+                    CategoryId = reader.IsDBNull(reader.GetOrdinal("categoryId"))
+                        ? (int?)null
+                        : reader.GetInt32(reader.GetOrdinal("categoryId")),
+                    Attachment = reader.IsDBNull(reader.GetOrdinal("Attachment"))
+                        ? null
+                        : (byte[])reader["Attachment"],
+                    FinderId = reader.IsDBNull(reader.GetOrdinal("finderId"))
+                        ? (int?)null
+                        : reader.GetInt32(reader.GetOrdinal("finderId")),
+                    RetrieverId = reader.IsDBNull(reader.GetOrdinal("retrieverId"))
+                        ? (int?)null
+                        : reader.GetInt32(reader.GetOrdinal("retrieverId")),
+                };
+
+                result.Add(dto);
+            }
+
+            return result;
         }
     }
 }
