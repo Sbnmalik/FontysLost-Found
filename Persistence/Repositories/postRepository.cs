@@ -103,5 +103,17 @@ namespace Persistence.Repositories
             await cmd.ExecuteNonQueryAsync();
 
         }
+        public async Task DeleteAsync(int id)
+        {
+            const string sql = @"DELETE FROM dbo.Posts WHERE Id = @Id;";
+
+            await using var conn = new SqlConnection(_connectionString);
+            await conn.OpenAsync();
+
+            await using var cmd = new SqlCommand(sql, conn);
+            cmd.Parameters.Add(new SqlParameter("@Id", SqlDbType.Int) { Value = id });
+
+            await cmd.ExecuteNonQueryAsync();
+        }
     }
 }
