@@ -75,5 +75,9 @@ namespace BusinessLogicLayer.Services
             };
             await _postRepository.UpdateAsync(dto);
         }
+        public async Task DeleteAsync(int id)
+        {
+            await _postRepository.DeleteAsync(id);
+        }
     }
 }

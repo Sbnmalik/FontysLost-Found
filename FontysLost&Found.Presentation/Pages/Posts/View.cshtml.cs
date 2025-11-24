@@ -13,11 +13,16 @@ namespace FontysLost_Found.Presentation.Pages.Posts
         public ViewModel(PostService postService)
         {
             _postService = postService;
-        }   
+        }
         public async Task OnGet()
         {
-            Posts =  await _postService.GetAllAsync();
-            
+            Posts = await _postService.GetAllAsync();
+
+        }
+        public async Task<IActionResult> OnPostDeleteAsync(int id) 
+        {
+            await _postService.DeleteAsync(id);
+            return RedirectToPage("/Posts/View");
         }
     }
 }
