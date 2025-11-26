@@ -79,5 +79,24 @@ namespace BusinessLogicLayer.Services
         {
             await _postRepository.DeleteAsync(id);
         }
+        //add getbyidasync method
+        public async Task<Post?> GetByIdAsync(int id)
+        {
+            var dto = await _postRepository.GetByIdAsync(id);
+            if (dto == null)
+                return null;
+            var post = new Post
+            {
+                Id = dto.Id,
+                Title = dto.Title,
+                Description = dto.Description,
+                DateCreated = dto.DateCreated,
+                CategoryId = dto.CategoryId,
+                Attachment = dto.Attachment,
+                FinderId = dto.FinderId,
+                RetrieverId = dto.RetrieverId
+            };
+            return post;
+        }
     }
 }
