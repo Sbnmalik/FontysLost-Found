@@ -29,7 +29,13 @@ else
                 @foreach (var post in Model.Posts)
                 {
                     <tr style="cursor:pointer;">
-                        <td>@post.Title</td>
+                        <td>
+                            <a 
+                              asp-page="/Posts/Details"
+                              asp-route-id="@post.Id">
+                              @post.Title
+                            </a>
+                        </td>
                         <td>@post.Description</td>
                         <td>@post.DateCreated.ToString("dd MMM yyyy HH:mm")</td>
                         <td>

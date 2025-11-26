@@ -80,7 +80,43 @@ namespace Persistence.Repositories
 
             return result;
         }
-        //add update method
+        //add getbyid async method
+        public async Task<postDto?> GetByIdAsync(int id)
+        {
+            const string sql = @"
+                SELECT Id, Title, Description, date_created, categoryId, Attachment, finderId, retrieverId
+                FROM dbo.Posts
+                WHERE Id = @Id;";
+            await using var conn = new SqlConnection(_connectionString);
+            await conn.OpenAsync();
+            await using var cmd = new SqlCommand(sql, conn);
+            cmd.Parameters.Add(new SqlParameter("@Id", SqlDbType.Int) { Value = id });
+            await using var reader = await cmd.ExecuteReaderAsync();
+            if (await reader.ReadAsync())
+            {
+                var dto = new postDto
+                {
+                    Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                    Title = reader.GetString(reader.GetOrdinal("Title")),
+                    Description = reader.GetString(reader.GetOrdinal("Description")),
+                    DateCreated = reader.GetDateTime(reader.GetOrdinal("date_created")),
+                    CategoryId = reader.IsDBNull(reader.GetOrdinal("categoryId"))
+                        ? (int?)null
+                        : reader.GetInt32(reader.GetOrdinal("categoryId")),
+                    Attachment = reader.IsDBNull(reader.GetOrdinal("Attachment"))
+                        ? null
+                        : (byte[])reader["Attachment"],
+                    FinderId = reader.IsDBNull(reader.GetOrdinal("finderId"))
+                        ? (int?)null
+                        : reader.GetInt32(reader.GetOrdinal("finderId")),
+                    RetrieverId = reader.IsDBNull(reader.GetOrdinal("retrieverId"))
+                        ? (int?)null
+                        : reader.GetInt32(reader.GetOrdinal("retrieverId")),
+                };
+                return dto;
+            }
+            return null;
+        }
         public async Task UpdateAsync(postDto entity)
         {
             const string sql = @"
