@@ -15,7 +15,9 @@ namespace Persistence
                 .AsSelf()
                 .InstancePerLifetimeScope();
 
-
+            builder.RegisterType<UserRepository> ()
+                .AsSelf()
+                .InstancePerLifetimeScope();
 
         }
     }

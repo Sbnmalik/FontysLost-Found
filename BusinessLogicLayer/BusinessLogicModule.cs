@@ -1,6 +1,7 @@
 ﻿//using BusinessLogicLayer.Abstractions;
 using BusinessLogicLayer.Services;
 using Autofac;
+using Autofac.Features.AttributeFilters;
 
 namespace BusinessLogicLayer
 {
@@ -11,6 +12,9 @@ namespace BusinessLogicLayer
             builder.RegisterType<PostService>()
                    .AsSelf()
                    .InstancePerLifetimeScope();
+            builder.RegisterType<AuthenticationService>()
+                .AsSelf()
+                .InstancePerLifetimeScope();
         }
     }
 }

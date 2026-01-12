@@ -3,6 +3,8 @@ using BusinessLogicLayer.Services;
 using Autofac.Extensions.DependencyInjection;
 using Autofac;
 using System.Reflection;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +13,13 @@ builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options=>
+    {
+        options.LoginPath = "/Login";
+        options.LogoutPath= "/Logout";
+        options.AccessDeniedPath = "/AccessDenied";
+    });
 
 // Configure Autofac container (must run before Build)
 builder.Host.ConfigureContainer<ContainerBuilder>((ctx, container) =>

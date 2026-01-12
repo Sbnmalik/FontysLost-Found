@@ -1,0 +1,32 @@
+﻿@page
+@model FontysLost_Found.Presentation.Pages.Authentication.RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+<h2>Register</h2>
+
+<form method="post">
+    <div class="mb-3">
+        <label asp-for="Input.UserName" class="form-label"></label>
+        <input asp-for="Input.UserName" class="form-control" />
+        <span asp-validation-for="Input.UserName" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Input.EmailAdress" class="form-label"></label>
+        <input asp-for="Input.EmailAdress" class="form-control" />
+        <span asp-validation-for="Input.EmailAdress" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Input.Password" class="form-label"></label>
+        <input asp-for="Input.Password" class="form-control" type="password" />
+        <span asp-validation-for="Input.Password" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Register</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
