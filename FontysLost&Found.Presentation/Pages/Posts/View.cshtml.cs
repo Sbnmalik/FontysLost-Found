@@ -1,4 +1,4 @@
-using BusinessLogicLayer.Services;
+using BusinessLogicLayer.Abstractions;
 using BusinessLogicLayer.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -8,9 +8,9 @@ namespace FontysLost_Found.Presentation.Pages.Posts
     [BindProperties]
     public class ViewModel : PageModel
     {
-        private readonly PostService _postService;
+        private readonly IPostService _postService;
         public List<Post> Posts { get; private set; } = new();
-        public ViewModel(PostService postService)
+        public ViewModel(IPostService postService)
         {
             _postService = postService;
         }

@@ -1,13 +1,13 @@
-﻿using BusinessLogicLayer.Models;
-using Persistence;
-using Persistence.Repositories;
+﻿using BusinessLogicLayer.Abstractions;
+using BusinessLogicLayer.Models;
+
 
 namespace BusinessLogicLayer.Services
 {
-    public class PostService
+    public class PostService : IPostService
     { 
-        private readonly PostRepository _postRepository;
-        public PostService(PostRepository postRepository)
+        private readonly IPostRepository _postRepository;
+        public PostService(IPostRepository postRepository)
         {
             _postRepository = postRepository;
         }
@@ -79,7 +79,7 @@ namespace BusinessLogicLayer.Services
         {
             await _postRepository.DeleteAsync(id);
         }
-        //add getbyidasync method
+        
         public async Task<Post?> GetByIdAsync(int id)
         {
             var dto = await _postRepository.GetByIdAsync(id);

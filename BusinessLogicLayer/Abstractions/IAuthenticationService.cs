@@ -1,5 +1,5 @@
 ﻿using BusinessLogicLayer.Models;
-using Persistence.Data_Transfer_Objects;
+using BusinessLogicLayer.Data_Transfer_Objects;
 
 namespace BusinessLogicLayer.Abstractions
 {

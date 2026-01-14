@@ -5,7 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Persistence
+namespace BusinessLogicLayer
+
 {
     // Incoming data
     public class postCreateDTO

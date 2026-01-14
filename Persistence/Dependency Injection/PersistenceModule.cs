@@ -1,9 +1,10 @@
 ﻿using Autofac;
-using Persistence.Repositories;
+using BusinessLogicLayer.Abstractions;
+using BusinessLogicLayer.Repositories;
 using System.Reflection;
 
 
-namespace Persistence
+namespace BusinessLogicLayer
 {
     public class PersistenceModule : Autofac.Module
     {
@@ -12,11 +13,11 @@ namespace Persistence
 
             //Explicitly register PostRepository as IPostRepository
             builder.RegisterType<PostRepository>()
-                .AsSelf()
+                .As<IPostRepository>()
                 .InstancePerLifetimeScope();
 
             builder.RegisterType<UserRepository> ()
-                .AsSelf()
+                .As<IUserRepository>()
                 .InstancePerLifetimeScope();
 
         }

@@ -1,14 +1,14 @@
-using BusinessLogicLayer.Services;
+using BusinessLogicLayer.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Persistence;
+using BusinessLogicLayer;
 
 namespace FontysLost_Found.Presentation.Pages.Posts
 {
     public class EditModel : PageModel
     {
-        private readonly PostService _postService;
-        public EditModel(PostService postService)
+        private readonly IPostService _postService;
+        public EditModel(IPostService postService)
         {
             _postService = postService;
         }

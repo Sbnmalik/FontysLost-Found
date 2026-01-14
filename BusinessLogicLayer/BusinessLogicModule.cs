@@ -1,7 +1,7 @@
-﻿//using BusinessLogicLayer.Abstractions;
-using BusinessLogicLayer.Services;
+﻿using BusinessLogicLayer.Services;
 using Autofac;
 using Autofac.Features.AttributeFilters;
+using BusinessLogicLayer.Abstractions;
 
 namespace BusinessLogicLayer
 {
@@ -10,10 +10,10 @@ namespace BusinessLogicLayer
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<PostService>()
-                   .AsSelf()
+                   .As<IPostService>()
                    .InstancePerLifetimeScope();
             builder.RegisterType<AuthenticationService>()
-                .AsSelf()
+                .As<IAuthenticationService>()
                 .InstancePerLifetimeScope();
         }
     }

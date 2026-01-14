@@ -1,10 +1,6 @@
 ﻿using BusinessLogicLayer.Abstractions;
 using BusinessLogicLayer.Models;
-using Persistence.Data_Transfer_Objects;
-using Persistence.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using BusinessLogicLayer.Data_Transfer_Objects;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,8 +9,8 @@ namespace BusinessLogicLayer.Services
 {
     public class AuthenticationService : IAuthenticationService
     {
-        private readonly UserRepository _userRepository;
-        public AuthenticationService(UserRepository userRepository)
+        private readonly IUserRepository _userRepository;
+        public AuthenticationService(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }

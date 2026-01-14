@@ -1,11 +1,12 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
-using Persistence.Data_Transfer_Objects;
+using BusinessLogicLayer.Data_Transfer_Objects;
 using System.Data;
+using BusinessLogicLayer.Abstractions;
 
-namespace Persistence.Repositories
+namespace BusinessLogicLayer.Repositories
 {
-    public class UserRepository
+    public class UserRepository : IUserRepository
     {
         private readonly string _connectionString;
         public UserRepository(IConfiguration cfg)
@@ -13,6 +14,12 @@ namespace Persistence.Repositories
             _connectionString = cfg.GetConnectionString("DefaultConnection") ??
                 throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
         }
+
+        public Task<int> DeleteAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<UserDTO?> GetByUsernameAsync(string userName)
         {
             const string sql = @"
@@ -54,6 +61,11 @@ namespace Persistence.Repositories
             cmd.Parameters.Add(new SqlParameter("@PasswordSalt", SqlDbType.VarBinary, 128) { Value = user.PasswordSalt });
             var result = await cmd.ExecuteScalarAsync();
             return Convert.ToInt32(result);
+        }
+
+        public Task<int> UpdateAsync(UserDTO user)
+        {
+            throw new NotImplementedException();
         }
     }
 }
