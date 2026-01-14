@@ -1,7 +1,6 @@
 using BusinessLogicLayer.Services;
 using BusinessLogicLayer.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Data;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FontysLost_Found.Presentation.Pages.Posts

@@ -1,14 +1,15 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
+using BusinessLogicLayer.Abstractions;
 using System.Data;
 
 
 
 
 
-namespace Persistence.Repositories
+namespace BusinessLogicLayer.Repositories
 {
-    public class PostRepository
+    public class PostRepository : IPostRepository
     {
         private readonly string _connectionString;
         public PostRepository(IConfiguration cfg)
@@ -80,7 +81,7 @@ namespace Persistence.Repositories
 
             return result;
         }
-        //add getbyid async method
+
         public async Task<postDto?> GetByIdAsync(int id)
         {
             const string sql = @"

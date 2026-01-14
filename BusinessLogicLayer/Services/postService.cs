@@ -1,13 +1,13 @@
-﻿using BusinessLogicLayer.Models;
-using Persistence;
-using Persistence.Repositories;
+﻿using BusinessLogicLayer.Abstractions;
+using BusinessLogicLayer.Models;
+
 
 namespace BusinessLogicLayer.Services
 {
     public class PostService
     { 
-        private readonly PostRepository _postRepository;
-        public PostService(PostRepository postRepository)
+        private readonly IPostRepository _postRepository;
+        public PostService(IPostRepository postRepository)
         {
             _postRepository = postRepository;
         }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Persistence.Data_Transfer_Objects
+namespace BusinessLogicLayer.Data_Transfer_Objects
 {
     public class UserDTO
     {

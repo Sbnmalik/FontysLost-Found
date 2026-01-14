@@ -1,9 +1,9 @@
 ﻿using Autofac;
-using Persistence.Repositories;
+using BusinessLogicLayer.Repositories;
 using System.Reflection;
 
 
-namespace Persistence
+namespace BusinessLogicLayer
 {
     public class PersistenceModule : Autofac.Module
     {

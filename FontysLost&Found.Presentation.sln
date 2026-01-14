@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.14.36414.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FontysLost&Found.Presentation", "FontysLost&Found.Presentation\FontysLost&Found.Presentation.csproj", "{30D884ED-EFFC-4A58-B597-76FA93E93E3A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{EF91EECC-8CCA-4445-B2F2-673F31BD5C80} = {EF91EECC-8CCA-4445-B2F2-673F31BD5C80}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogicLayer", "BusinessLogicLayer\BusinessLogicLayer.csproj", "{20B91BCD-6C39-46B3-8DE4-60D92444D0B2}"
 EndProject
