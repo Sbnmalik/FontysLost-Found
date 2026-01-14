@@ -1,4 +1,4 @@
-using BusinessLogicLayer.Services;
+using BusinessLogicLayer.Abstractions;
 using BusinessLogicLayer.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc;
@@ -7,8 +7,8 @@ namespace FontysLost_Found.Presentation.Pages.Posts
 {
     public class DetailsModel : PageModel
     {
-        private readonly PostService _postService;
-        public DetailsModel(PostService postService)
+        private readonly IPostService _postService;
+        public DetailsModel(IPostService postService)
         {
             _postService = postService;
         }

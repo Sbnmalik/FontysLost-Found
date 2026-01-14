@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using BusinessLogicLayer.Abstractions;
 using BusinessLogicLayer.Repositories;
 using System.Reflection;
 
@@ -12,11 +13,11 @@ namespace BusinessLogicLayer
 
             //Explicitly register PostRepository as IPostRepository
             builder.RegisterType<PostRepository>()
-                .AsSelf()
+                .As<IPostRepository>()
                 .InstancePerLifetimeScope();
 
             builder.RegisterType<UserRepository> ()
-                .AsSelf()
+                .As<IUserRepository>()
                 .InstancePerLifetimeScope();
 
         }

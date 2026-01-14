@@ -1,14 +1,14 @@
 using BusinessLogicLayer.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using BusinessLogicLayer.Services;
+using BusinessLogicLayer.Abstractions;
 
 namespace FontysLost_Found.Presentation.Pages.Authentication
 {
     public class RegisterModel : PageModel
     {
-        private readonly AuthenticationService _authService;
-        public RegisterModel(AuthenticationService authService)
+        private readonly IAuthenticationService _authService;
+        public RegisterModel(IAuthenticationService authService)
         {
             _authService = authService;
         }

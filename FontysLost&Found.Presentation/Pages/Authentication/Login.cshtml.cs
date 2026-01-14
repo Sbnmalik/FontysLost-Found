@@ -1,18 +1,19 @@
 using BusinessLogicLayer.Models;
-using BusinessLogicLayer.Services;
+using BusinessLogicLayer.Abstractions;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Security.Claims;
-using AuthenticationService = BusinessLogicLayer.Services.AuthenticationService;
+using IAuthenticationService = BusinessLogicLayer.Abstractions.IAuthenticationService;
+
 
 namespace FontysLost_Found.Presentation.Pages.Authentication
 {
     public class LoginModel : PageModel
     {
-        private readonly AuthenticationService _authService;
-        public LoginModel(AuthenticationService authService)
+        private readonly IAuthenticationService _authService;
+        public LoginModel(IAuthenticationService authService)
         {
             _authService = authService;
         }
