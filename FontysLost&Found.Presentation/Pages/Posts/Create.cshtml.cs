@@ -2,11 +2,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using BusinessLogicLayer;
 using BusinessLogicLayer.Abstractions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FontysLost_Found.Presentation.Pages.Posts
 
 {
     [BindProperties]
+    [Authorize]
     public class CreateModel : PageModel
     {
         private readonly IPostService _postService;

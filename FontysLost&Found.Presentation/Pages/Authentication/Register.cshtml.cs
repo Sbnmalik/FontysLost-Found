@@ -31,7 +31,7 @@ namespace FontysLost_Found.Presentation.Pages.Authentication
                 
             }
             await _authService.RegisterAsync(Input);
-            return RedirectToPage("/Login");
+            return RedirectToPage("./Login");
 
         }
     }

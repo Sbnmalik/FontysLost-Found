@@ -22,7 +22,7 @@ namespace FontysLost_Found.Presentation.Pages.Authentication
         public void OnGet()
         {
         }
-        public async  Task<IActionResult> OnPostAsnyc (string? returnUrl = null)
+        public async  Task<IActionResult> OnPostAsync (string? returnUrl = null)
         {
             if (!ModelState.IsValid)
             {
@@ -53,7 +53,7 @@ namespace FontysLost_Found.Presentation.Pages.Authentication
             
             return Redirect(returnUrl);
             
-            return RedirectToPage("/View");
+            return RedirectToPage("/Posts/View");
 
 
         }
