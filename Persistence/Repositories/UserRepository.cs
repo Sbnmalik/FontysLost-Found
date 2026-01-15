@@ -56,7 +56,7 @@ namespace BusinessLogicLayer.Repositories
             await conn.OpenAsync();
             await using var cmd = new SqlCommand(sql, conn);
             cmd.Parameters.Add(new SqlParameter("@UserName", SqlDbType.NVarChar, 50) { Value = user.UserName });
-            cmd.Parameters.Add(new SqlParameter("@Email", SqlDbType.NVarChar, 50) { Value = user.Email });
+            cmd.Parameters.Add(new SqlParameter("@Email", SqlDbType.NVarChar, 256) { Value = user.Email });
             cmd.Parameters.Add(new SqlParameter("@PasswordHash", SqlDbType.VarBinary, 256) { Value = user.PasswordHash });
             cmd.Parameters.Add(new SqlParameter("@PasswordSalt", SqlDbType.VarBinary, 128) { Value = user.PasswordSalt });
             var result = await cmd.ExecuteScalarAsync();
