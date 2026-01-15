@@ -3,30 +3,91 @@
 @{
     ViewData["Title"] = "Register";
 }
-<h2>Register</h2>
 
-<form method="post">
-    <div class="mb-3">
-        <label asp-for="Input.UserName" class="form-label"></label>
-        <input asp-for="Input.UserName" class="form-control" />
-        <span asp-validation-for="Input.UserName" class="text-danger"></span>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-sm-10 col-md-7 col-lg-5">
+
+            <div class="card shadow-sm border-0 rounded-4">
+                <div class="card-body p-4 p-md-5">
+                    <h2 class="fw-semibold mb-1">Create account</h2>
+                    <p class="text-muted mb-4">Join Fontys Lost &amp; Found in a minute.</p>
+
+                    <form method="post" novalidate>
+                        <div asp-validation-summary="ModelOnly" class="text-danger small mb-3"></div>
+
+                        <div class="mb-3">
+                            <label asp-for="Input.UserName" class="form-label"></label>
+                            <input asp-for="Input.UserName"
+                                   class="form-control form-control-lg"
+                                   autocomplete="username"
+                                   placeholder="Choose a username" />
+                            <span asp-validation-for="Input.UserName" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Input.EmailAdress" class="form-label"></label>
+                            <input asp-for="Input.EmailAdress"
+                                   class="form-control form-control-lg"
+                                   autocomplete="email"
+                                   placeholder="name@example.com" />
+                            <span asp-validation-for="Input.EmailAdress" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-2">
+                            <label asp-for="Input.Password" class="form-label"></label>
+
+                            <div class="input-group input-group-lg">
+                                <input asp-for="Input.Password"
+                                       class="form-control"
+                                       type="password"
+                                       id="regPwd"
+                                       autocomplete="new-password"
+                                       placeholder="Create a password" />
+                                <button class="btn btn-outline-secondary" type="button" id="toggleRegPwd">
+                                    Show
+                                </button>
+                            </div>
+
+                            <span asp-validation-for="Input.Password" class="text-danger small"></span>
+
+                            <div class="form-text">
+                                Use at least 8 characters and avoid common words.
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-lg w-100 mt-3">
+                            Register
+                        </button>
+
+                        <div class="text-center mt-3">
+                            <span class="text-muted">Already have an account?</span>
+                            <a asp-page="/Authentication/Login" class="text-decoration-none fw-semibold">
+                                Login
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <p class="text-center text-muted small mt-3 mb-0">
+                By registering you agree to our terms and privacy policy.
+            </p>
+
+        </div>
     </div>
-
-    <div class="mb-3">
-        <label asp-for="Input.EmailAdress" class="form-label"></label>
-        <input asp-for="Input.EmailAdress" class="form-control" />
-        <span asp-validation-for="Input.EmailAdress" class="text-danger"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="Input.Password" class="form-label"></label>
-        <input asp-for="Input.Password" class="form-control" type="password" />
-        <span asp-validation-for="Input.Password" class="text-danger"></span>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Register</button>
-</form>
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        const pwd = document.getElementById('regPwd');
+        const btn = document.getElementById('toggleRegPwd');
+
+        btn?.addEventListener('click', () => {
+            const isPassword = pwd.type === 'password';
+            pwd.type = isPassword ? 'text' : 'password';
+            btn.textContent = isPassword ? 'Hide' : 'Show';
+        });
+    </script>
 }
