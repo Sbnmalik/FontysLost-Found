@@ -21,6 +21,8 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.AccessDeniedPath = "/AccessDenied";
     });
 
+builder.Services.AddAuthorization();
+
 // Configure Autofac container (must run before Build)
 builder.Host.ConfigureContainer<ContainerBuilder>((ctx, container) =>
 {
@@ -45,6 +47,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
