@@ -36,7 +36,7 @@ namespace FontysLost_Found.Presentation.Pages.Posts
             }
             var id = await _postService.CreateAsync(input);
             TempData["Flash.Success"] = "Lost object post created!";
-            return RedirectToPage("Index", new { id });
+            return RedirectToPage("/Index", new { id });
         }
     }
 }
