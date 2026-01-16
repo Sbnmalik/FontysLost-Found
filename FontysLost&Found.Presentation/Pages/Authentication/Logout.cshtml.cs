@@ -12,8 +12,5 @@ namespace FontysLost_Found.Presentation.Pages.Authentication
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToPage("/Index");
         }
-        
-
-        
     }
 }
