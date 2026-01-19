@@ -1,11 +1,86 @@
 ﻿@page "/View"
+@using Microsoft.AspNetCore.Html
+@using System.Text
 @model FontysLost_Found.Presentation.Pages.Posts.ViewModel
+@functions {
+    public IHtmlContent Highlight(string? text, string? term)
+    {
+        if (string.IsNullOrEmpty(text))
+            return HtmlString.Empty;
+
+        if (string.IsNullOrWhiteSpace(term))
+            return new HtmlString(
+                System.Text.Encodings.Web.HtmlEncoder.Default.Encode(text)
+            );
+
+        var input = text;
+        var search = term.Trim();
+
+        var sb = new StringBuilder();
+        var idx = 0;
+
+        while (true)
+        {
+            var matchIndex = input.IndexOf(search, idx, StringComparison.OrdinalIgnoreCase);
+            if (matchIndex < 0)
+            {
+                sb.Append(
+                    System.Text.Encodings.Web.HtmlEncoder.Default.Encode(
+                        input.Substring(idx)
+                    )
+                );
+                break;
+            }
+
+            // before match
+            sb.Append(
+                System.Text.Encodings.Web.HtmlEncoder.Default.Encode(
+                    input.Substring(idx, matchIndex - idx)
+                )
+            );
+
+            // match (highlighted)
+            var matchText = input.Substring(matchIndex, search.Length);
+            sb.Append("<mark>");
+            sb.Append(
+                System.Text.Encodings.Web.HtmlEncoder.Default.Encode(matchText)
+            );
+            sb.Append("</mark>");
+
+            idx = matchIndex + search.Length;
+        }
+
+        return new HtmlString(sb.ToString());
+    }
+}
 
 @{
     ViewData["Title"] = "Posts";
 }
 
 <h1 class="mt-4 mb-4">Posts</h1>
+
+<form method="get" class="mb-3">
+    <div class="input-group">
+        <input type="text"
+               name="Search"
+               value="@Model.Search"
+               class="form-control"
+               placeholder="Search posts..." />
+
+        <button type="submit" class="btn btn-primary">
+            Search
+        </button>
+
+        @if (!string.IsNullOrEmpty(Model.Search))
+        {
+            <a asp-page="/Posts/View" class="btn btn-secondary">
+                Clear
+            </a>
+        }
+    </div>
+</form>
+
 
 @if (!Model.Posts.Any())
 {
@@ -33,10 +108,10 @@ else
                             <a 
                               asp-page="/Posts/Details"
                               asp-route-id="@post.Id">
-                              @post.Title
+                                @Highlight(post.Title, Model.Search)
                             </a>
                         </td>
-                        <td>@post.Description</td>
+                        <td>@Highlight(post.Description, Model.Search)</td>
                         <td>@post.DateCreated.ToString("dd MMM yyyy HH:mm")</td>
                         @if (User.IsInRole("Admin"))
                        {
