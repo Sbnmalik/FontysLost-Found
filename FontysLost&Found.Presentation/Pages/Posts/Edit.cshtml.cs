@@ -1,10 +1,13 @@
+using BusinessLogicLayer;
 using BusinessLogicLayer.Abstractions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using BusinessLogicLayer;
 
 namespace FontysLost_Found.Presentation.Pages.Posts
 {
+    [Authorize(Roles = "Admin")]
+
     public class EditModel : PageModel
     {
         private readonly IPostService _postService;
