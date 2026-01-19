@@ -16,8 +16,22 @@ namespace FontysLost_Found.Presentation.Pages.Posts
         {
             _postService = postService;
         }
+        [BindProperty(SupportsGet = true)]
+        public string? Search { get; set; }
         public async Task OnGet()
         {
+            var posts = await _postService.GetAllAsync();
+
+            if (!string.IsNullOrWhiteSpace(Search))
+            {
+                posts = posts
+                    .Where(p =>
+                        p.Title.Contains(Search, StringComparison.OrdinalIgnoreCase) ||
+                        p.Description.Contains(Search, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+            }
+
+            Posts = posts;
             Posts = await _postService.GetAllAsync();
 
         }

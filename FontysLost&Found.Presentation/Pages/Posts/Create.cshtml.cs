@@ -8,7 +8,7 @@ namespace FontysLost_Found.Presentation.Pages.Posts
 
 {
     [BindProperties]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class CreateModel : PageModel
     {
         private readonly IPostService _postService;

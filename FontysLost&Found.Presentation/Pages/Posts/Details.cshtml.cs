@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FontysLost_Found.Presentation.Pages.Posts
 {
+
     public class DetailsModel : PageModel
     {
         private readonly IPostService _postService;

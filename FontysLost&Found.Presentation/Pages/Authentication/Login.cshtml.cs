@@ -39,7 +39,12 @@ namespace FontysLost_Found.Presentation.Pages.Authentication
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Name, user.UserName),
-                new Claim(ClaimTypes.Email, user.Email)
+                new Claim(ClaimTypes.Email, user.Email),
+
+                new Claim(ClaimTypes.Role, user.UserName.Equals("Admin", StringComparison.OrdinalIgnoreCase)
+                    ? "Admin" :
+                    "User")
+
             };
             var identity = new ClaimsIdentity(
                 claims, CookieAuthenticationDefaults.AuthenticationScheme);
